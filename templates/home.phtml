@@ -1,0 +1,24 @@
+<p>Bienvenue, vous pouvez vous connecter ici</p>
+
+<?php if($this->userSession->isConnected()): ?>
+    <p>Bonjour <?= $_SESSION['user']['firstName'] ?></p>
+<?php endif?>
+
+<?php if(!$this->userSession->isConnected()): ?>
+    <form class="HomeLogin" action="index.php?action=home" method="POST">
+        <fieldset>
+            <legend>Connectez vous</legend>
+            <label for="email">Email : </label>
+            <input type="text" id="email" name="email">
+
+            <label for="password">Mot de passe : </label>
+            <input type="password" id="password" name="password">
+
+            <button type="submit">Connexion</button>
+        </fieldset>
+
+        <?php if(isset($errors['message'])):?>
+        <p><?=   $errors['message'];?> </p> 
+        <?php endif?>
+    </form>
+<?php endif ?>

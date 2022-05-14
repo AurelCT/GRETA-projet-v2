@@ -1,0 +1,32 @@
+<p>Créer un compte</p>
+
+<form action="index.php?action=signup" method="post">
+    <label for="lastName">Votre nom : </label>
+    <input type="text" name="lastName" id="lastName">
+    <?php if (isset($errors['lastName'])): ?>
+                <p class="error"><?=$errors['lastName'];?></p>
+    <?php endif; ?>
+
+    <label for="firstName">Votre prénom : </label>
+    <input type="text" name="firstName" id="firstName">
+    <?php if (isset($errors['firstname'])): ?>
+                <p class="error"><?=$errors['firstName'];?></p>
+     <?php endif; ?>
+
+    <label for="email">Votre email : </label>
+    <input type="email" name="email" id="email">
+    <?php if (isset($errors['email'])): ?>
+                <p class="error"><?=$errors['email'];?></p>
+    <?php endif; ?>
+
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" name="password">
+    <?php if (isset($errors['password'])): ?>
+                <p class="error"><?=$errors['password'];?></p>
+    <?php endif; ?>
+
+    <label for="passwordConfirm">Mot de passe (confirmation)</label>
+    <input type="password" id="passwordConfirm" name="passwordConfirm">
+
+    <button type="submit">Créer votre compte</button>
+</form>
