@@ -22,7 +22,7 @@ class CandidateModel extends AbstractModel
     }
     
     /**
-     * On crée une fonction pour récupérer le candidat via son 
+     * On crée une fonction pour récupérer le candidat via son id
      * @return array
     */
     public function getCandidate($id_candidat): array
@@ -37,6 +37,7 @@ class CandidateModel extends AbstractModel
         }
         return $candidate;
     }
+
     /**
     * Requête pour ajouter un candidat 
     * @return PDOStatement

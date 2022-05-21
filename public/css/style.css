@@ -18,8 +18,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   background-color: white;
-  margin-top: 20px;
-  height: 100px;
+  height: 80px;
 }
 
 .Header-nav {
@@ -147,6 +146,9 @@ body {
   .button-burger {
     display: none;
   }
+  .Header {
+    position: relative;
+  }
   .Header-nav {
     position: static;
     font-size: 20px;
@@ -169,6 +171,127 @@ body {
   .Header-nav-link {
     margin: 10px;
   }
+  .Header-nav-link:hover {
+    border-bottom: 2px solid #0ea5e9;
+    color: #161010;
+  }
+  .Header-nav-link:focus {
+    border-bottom: 2px solid #0ea5e9;
+  }
+  .Header-plus {
+    border: none;
+    border-radius: 10px;
+    background-color: #0ea5e9;
+    width: 80px;
+    height: 40px;
+  }
+  .Header-plus-menu {
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 130px;
+    border-radius: 5px;
+    -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+  .Header-plus-menu .AdminLink:hover {
+    background-color: #cbd4dd;
+  }
+  .Header-plus:hover {
+    cursor: pointer;
+    background-color: #118dc7;
+  }
+  .Header-plus-menu.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background-color: #f9fafb;
+    -webkit-transition: .5;
+    transition: .5;
+  }
+}
+
+.Connection {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #f9fafb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 50px;
+}
+
+.Connection-title {
+  font-size: 2em;
+}
+
+.Connection-form {
+  background-color: #ffffff;
+  color: black;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  width: 500px;
+  height: 200px;
+  padding: 20px;
+}
+
+.Connection-form .Field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 20px;
+}
+
+.Connection-form .Field-label {
+  font-size: 15px;
+}
+
+.Connection-form .Field-input {
+  border: none;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+          box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 5px;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.Connection-form .Field-input:hover {
+  -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.Connection-button {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  width: 80%;
+  height: 40px;
+  background-color: #4f46e5;
+  color: white;
+}
+
+.Connection-button:hover {
+  background-color: #413ab5;
 }
 
 .HomeLogin {

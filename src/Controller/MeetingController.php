@@ -44,7 +44,6 @@ class MeetingController extends AbstractController
 
     public function getMeetingForm()
     {
-        var_dump($_POST);
         //On récupère notre tableau des titres de formation  dans une variable
         $formations = (new FormationModel())->getAllFormations();
         //On récupère notre tableau des lieux de réunion  dans une variable

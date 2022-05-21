@@ -2,6 +2,8 @@
 
 namespace App\Middleware;
 
+use App\Repository\UserModel;
+
 class VerifyUser
 {
       /**
@@ -37,5 +39,29 @@ class VerifyUser
         $errors['password-confirm'] = 'Les mots de passe ne sont pas identiques';
         }
         return $errors;    
+    }
+
+     /**
+     * On vérifie les identifiants de connexion de l'utilisateur
+     * Si les identifiants sont corrects, on retourne l'utilisateur
+     * False si l'email n'existe pas ou le mot de passe est incorrect
+     */
+    public function checkUserInformations(string $email, string $password)
+    {
+        // On va chercher l'utilisateur à partir de l'email
+        $user = (new UserModel())->getUserByEmail($email);
+
+        // Si l'utilisateur existe 
+        if ($user) {
+            // Si le mot de passe est correct
+            if (password_verify($password, $user['password'])) {
+
+                // Tout est OK on peut retourner l'utilisateur
+                return $user;
+            }
+        }
+
+        // Si on arrive ici c'est qu'il y a un soucis soit avec l'email, soit avec le mot de passe
+        return false;
     }
 }

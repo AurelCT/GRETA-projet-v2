@@ -15,33 +15,32 @@ error_reporting(E_ALL);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+    <script src="https://unpkg.com/phosphor-icons"></script>
     <link rel="stylesheet" href="../public/css/style.css">
     <title>GretaInfoCo</title>
 </head>
 <body>
-    <header class="Header">
-        <button class="button-burger" id="btn-menu" type="button"></button>
-        <nav class='Header-nav'>
-        <a class="Header-nav-link"  href="index.php?action=createMeeting">ajouter une réunion</a>
-        <a class="Header-nav-link" href="index.php?action=allMeeting">Les réunions</a>
-        <a class="Header-nav-link" href="index.php?action=addCandidate">ajouter un candidat</a>
-        <a class="Header-nav-link"  href="index.php?action=candidates">Les candidats</a>
-        </nav>
+    <?php if($this->userSession->isConnected()): ?>
+        <header class="Header">
+            <button class="button-burger" id="btn-menu" type="button"></button>
+            <nav class='Header-nav'>     
+                <a class="Header-nav-link" href="index.php?action=allMeeting">Les réunions</a>
+                <a class="Header-nav-link"  href="index.php?action=candidates">Les candidats</a>
+            </nav>
 
-        <h1 class="Header-title"> <a href="index.php">Greta InfoCo</a></h1>
+            <h1 class="Header-title"> <a href="index.php">Greta InfoCo</a></h1>
 
-        <?php if(!$this->userSession->isConnected()): ?>
-            <div class="Header-admin">
-            <a href="#">Se connecter</a>
-            </div>
-        <?php endif ?>
 
-        <?php if($this->userSession->isConnected()): ?>
-            <div class="Header-admin">
-            <a href="index.php?action=logout">Se déconnecter</a>
-            </div>
-        <?php endif ?>
-    </header>
+                <div class="Header-admin">
+                    <div class="Header-plus-menu">
+                        <a class="Header-nav-link AdminLink" href="index.php?action=addCandidate">ajouter un candidat</a>
+                        <a class="Header-nav-link AdminLink"  href="index.php?action=createMeeting">ajouter une réunion</a>
+                    </div>
+                    <button id="HeaderPlus" class="Header-plus"> <i class="ph-plus-thin"></i> </button>
+                    <a href="index.php?action=logout">Se déconnecter</a>
+                </div>
+            </header>
+    <?php endif ?>
 
     <main>
         <?php include TEMPLATE_DIR . '/' . $template . '.phtml';?>     

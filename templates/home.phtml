@@ -1,24 +1,32 @@
-<p>Bienvenue, vous pouvez vous connecter ici</p>
-
-<?php if($this->userSession->isConnected()): ?>
-    <p>Bonjour <?= $_SESSION['user']['firstName'] ?></p>
-<?php endif?>
+<section class="Connection">
+    <?php if($this->userSession->isConnected()): ?>
+        <p>Bonjour <?= $_SESSION['user']['firstName'] ?></p>
+    <?php endif?>
 
 <?php if(!$this->userSession->isConnected()): ?>
-    <form class="HomeLogin" action="index.php?action=home" method="POST">
-        <fieldset>
-            <legend>Connectez vous</legend>
-            <label for="email">Email : </label>
-            <input type="text" id="email" name="email">
+    <section class="Connection">
+        <h2 class="Connection-title">Connexion à votre compte</h2>
+        <form class="Connection-form" action="index.php?action=home" method="POST">
+            
+            <div class="Connection-form-email Field">
+                <label class="Field-label" for="email">Email  </label>
+                <input class="Field-input"  id="email" name="email">
+            </div>
 
-            <label for="password">Mot de passe : </label>
-            <input type="password" id="password" name="password">
+            <div class="Connection-form-password Field">
+                <label class="Field-label" for="password">Mot de passe  </label>
+                <input class="Field-input" type="password" id="password" name="password">
+            </div>
+            
+            <button class="Connection-button" type="submit">Connexion</button>
+            
+            <?php if(isset($errors['message'])):?>
+                <p><?=   $errors['message'];?> </p> 
+                <?php endif?>
+            </form>
 
-            <button type="submit">Connexion</button>
-        </fieldset>
+    </section>
 
-        <?php if(isset($errors['message'])):?>
-        <p><?=   $errors['message'];?> </p> 
-        <?php endif?>
-    </form>
-<?php endif ?>
+        <?php endif ?>
+</section>
+
