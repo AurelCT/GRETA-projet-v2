@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Repository\UserModel;
-use App\Middleware\VerifyUser;
+use App\Services\VerifyUser;
 
 class DefaultController extends AbstractController
 {
@@ -35,23 +35,23 @@ class DefaultController extends AbstractController
     {
         $errors = [];
         if(!empty($_POST)){
-            //Récupération des données du formulaire
+            
             $lastName = trim($_POST['lastName']);
             $firstName = trim($_POST['firstName']);
             $email = trim($_POST['email']);
             $password = $_POST['password'];
             $passwordConfirm = $_POST['passwordConfirm'];
 
-
             $errors = (new VerifyUser())->validateUserForm($lastName,$firstName,$email,$password, $passwordConfirm);
 
             if(empty($errors)){
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $newUser = (new UserModel())->createNewUser($lastName,$firstName,$email,$hash);
+                header('Location: index.php?action=home');
             }
 
         }
-        return $this->render('signup', [
+        return $this->render('auth/signup', [
             'errors'=>$errors
         ]);
     }

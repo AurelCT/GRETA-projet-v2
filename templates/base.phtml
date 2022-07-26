@@ -1,8 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,27 +20,38 @@ error_reporting(E_ALL);
             <button class="button-burger" id="btn-menu" type="button"></button>
             <nav class='Header-nav'>     
                 <a class="Header-nav-link" href="index.php?action=allMeeting">Les réunions</a>
+                <a class="Header-nav-link HeaderHideDesktop"  href="index.php?action=createMeeting">ajouter une réunion</a>
                 <a class="Header-nav-link"  href="index.php?action=candidates">Les candidats</a>
+                <a class="Header-nav-link HeaderHideDesktop" href="index.php?action=addCandidate">ajouter un candidat</a>
             </nav>
+        
 
             <h1 class="Header-title"> <a href="index.php">Greta InfoCo</a></h1>
 
 
                 <div class="Header-admin">
-                    <div class="Header-plus-menu">
-                        <a class="Header-nav-link AdminLink" href="index.php?action=addCandidate">ajouter un candidat</a>
-                        <a class="Header-nav-link AdminLink"  href="index.php?action=createMeeting">ajouter une réunion</a>
+                    <div class="Header-button-menu">
+                        <a class="Header-nav-link HeaderHideMobile" href="index.php?action=addCandidate">ajouter un candidat</a>
+                        <a class="Header-nav-link HeaderHideMobile"  href="index.php?action=createMeeting">ajouter une réunion</a>
                     </div>
-                    <button id="HeaderPlus" class="Header-plus"> <i class="ph-plus-thin"></i> </button>
-                    <a href="index.php?action=logout">Se déconnecter</a>
+                    <button id="HeaderPlus" class="Header-button"> <i class="ph-plus-thin"></i> </button>
+                    <a class="Header-admin-deconnect" href="index.php?action=logout">Déconnexion</a>
                 </div>
             </header>
     <?php endif ?>
 
-    <main>
-        <?php include TEMPLATE_DIR . '/' . $template . '.phtml';?>     
-           
-    <script src="../public/js/index.js"></script>
+    <main class="Main">
+        <?php include TEMPLATE_DIR . '/' . $template . '.phtml';?> 
     </main>
+
+    <?php if($this->userSession->isConnected()): ?>
+        <footer class="Footer">
+            <p>mention légale</p>
+            <p>Contact</p>
+        </footer>   
+    <?php endif ?>   
+    
+        
+<script src="../public/js/index.js"></script>
 </body>
 </html>

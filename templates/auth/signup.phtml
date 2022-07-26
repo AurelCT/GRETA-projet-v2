@@ -1,0 +1,48 @@
+<div class="Signup">
+    <h2 class="Signup-title">Créer un compte</h2>
+    <span> <a class="Signup-link" href="index.php?action=home">Vous avez déjà un compte?</a> </span>
+</div>
+
+<form class="Adding" action="index.php?action=signup" method="POST">
+    <div class="AddingForm">
+        <label for="lastName">Votre nom : </label>
+        <input class="AddingForm-content" type="text" name="lastName" id="lastName">
+        <?php if (isset($errors['lastName'])): ?>
+                    <p class="AddingForm-error"><?=$errors['lastName'];?></p>
+        <?php endif; ?>
+    </div>
+    <div class="AddingForm">
+        <label for="firstName">Votre prénom : </label>
+        <input class="AddingForm-content" type="text" name="firstName" id="firstName">
+        <?php if (isset($errors['firstName'])): ?>
+            <p class="AddingForm-error"><?=$errors['firstName'];?></p>
+         <?php endif; ?>
+    </div>
+    <div class="AddingForm">
+
+        <label for="email">Votre email : </label>
+        <input class="AddingForm-content" type="email" name="email" id="email">
+        <?php if (isset($errors['email'])): ?>
+                    <p class="AddingForm-error"><?=$errors['email'];?></p>
+        <?php endif; ?>
+    </div>
+    <div class="AddingForm">
+        <label for="password">Mot de passe</label>
+        <input class="AddingForm-content" type="password" id="password" name="password">
+        <?php if (isset($errors['password'])): ?>
+                    <p class="AddingForm-error"><?=$errors['password'];?></p>
+        <?php endif; ?>
+    </div>
+    <div class="AddingForm">
+        <label for="passwordConfirm">Mot de passe (confirmation)</label>
+        <input class="AddingForm-content" type="password" id="passwordConfirm" name="passwordConfirm">
+        <?php if (isset($errors['password-confirm'])): ?>
+                    <p class="AddingForm-error"><?=$errors['password-confirm'];?></p>
+        <?php endif; ?>
+    </div>
+
+    <div class="AddingForm">
+        <input class="AddingForm-button" type="submit" value="Envoyer">
+    </div>
+
+</form>

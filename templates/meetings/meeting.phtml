@@ -1,0 +1,67 @@
+<section>
+
+
+<div class="MeetingHeader">
+    <h2><?= htmlspecialchars($meeting['name']) ?></h2>
+    <span>Réunion du : <?= htmlspecialchars($meeting['meetingDate']) ?></span>
+    
+    
+    <!-- formulaire pour ajouter un candiat à la réunion -->
+    
+        <form class="MeetingHeader-form" action="index.php?action=AddCandidateToMeeting" id="addToMeetingForm" method="POST">
+            <label for="addToMeeting">Ajouter un candidat : </label>
+            <div class="FormWrapper">
+                <select class="Select" name="id_candidat" id="addtoMeetingValue">
+                    <?php foreach ($allCandidates as $oneCandidate): ?>  
+                        <option value="<?=$oneCandidate['id_candidat']?>" ><?= $oneCandidate['nom']?>  <?= $oneCandidate['prenom']?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <input type="hidden" id="hiddenFormationId" name="id_meeting" value="<?=$meeting['id_event']?>">
+                    <button class="MeetingHeader-form-btn" type="submit">Ajouter </button>
+            </div>
+        </form>   
+</div>
+
+<div class="TableContainer" id="TableContainer">
+    <?php include 'meetingDetail.phtml';?> 
+</div>
+<div class="MeetingDelete">
+    <a class="MeetingDelete-btn" href="index.php?action=deleteMeeting&meeting_id=<?=$meeting['id_event']?>">Supprimer la réunion</a>
+</div>
+    
+<!-- Éditer les informations d'un candidat dans la réunion -->
+<div class="EditMeeting">
+    <div class="EditMeeting-content">
+        <form action="index.php?action=editCandidateMeeting" method="POST">
+            
+            <div class="EditMeeting-content-present">
+                <label for="present">Le candidat était présent?</label>
+                <select class="EditMeeting-content-present-select" name="present" id="present">
+                    <option value="oui">oui</option>
+                    <option value="non">non</option>
+                </select>
+            </div>
+
+            <div class="EditMeeting-content-retenu">
+                <label for="retenu">Le candidat est retenu?</label>
+                <select name="retenu" class="EditMeeting-content-present-select" id="retenu">
+                    <option value="oui">oui</option>
+                    <option value="non">non</option>
+                </select>
+            </div>
+            <div class="EditMeeting-content-textArea">
+                <textarea class="AddingForm-content EditTextArea"  name="commentsOnCandidat" id="commentsOnCandidat" cols="30" placeholder="Commentaires.." rows="10"></textarea>
+            </div>
+
+            <input name="formMeetingIdValue" id="formMeetingIdValue" type="hidden" value="<?= $meeting['id_event']?>">
+            <input name="formCandidateIdValue" id="formCandidateIdValue" type="hidden">
+
+            <div class="EditMeeting-content-button">
+                <input class="EditMeeting-content-validate" type="submit">
+        </form>
+        <button class="EditMeeting-content-btn" id="closeModalForm">Annuler</button>
+            </div>
+    </div>
+    </div>
+</div>
+</section>

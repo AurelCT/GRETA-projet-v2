@@ -1,0 +1,83 @@
+
+<h2 class="Title">Ajouter un candidat</h2>
+<form action="index.php?action=addCandidate" method="POST" class="Adding">
+<div class="WrapperNameInfo">
+    <div class="WrapperFormName">
+
+        <div class="AddCandidate-lastName AddingForm">
+            <label class="AddingForm-lastName" for="lastName">Nom : </label>
+            <input class="AddingForm-content" id="lastName" type="text" name="lastName" >
+            <?php if(isset($errors['lastName'])):?>
+                <p class="AddingForm-error"> <?= $errors['lastName'] ?> </p>
+            <?php  endif?>
+        </div>
+            
+        <div class="AddCandidate-firstName AddingForm">
+            <label for="firstName">Prénom : </label>
+            <input class="AddingForm-content" type="text" name="firstName">
+            <?php if(isset($errors['firstName'])):?>
+                <p class="AddingForm-error" > <?= $errors['firstName'] ?> </p>
+                <?php  endif?>
+        </div>
+
+        <div class="AddCandidate-email AddingForm">
+            <label for="email">Email : </label>
+            <input class="AddingForm-content" type="text" name="email">
+            <?php if(isset($errors['email'])):?>
+                <p class="AddingForm-error"> <?= $errors['email'] ?> </p>
+            <?php  endif?>
+        </div>
+    </div>
+
+    <div class="WrapperFormInfo">
+        <div class="AddCandidate-phone AddingForm">
+            <label for="phone">Numéro de téléphone : </label>
+            <input class="AddingForm-content" type="text" name="phone">
+            <?php if(isset($errors['phone'])):?>
+                <p class="AddingForm-error"> <?= $errors['phone'] ?> </p>
+                <?php  endif?>
+        </div>
+        <div class="Addcandidate-adress AddingForm">
+            <label for="adress">Adresse : </label>
+            <input class="AddingForm-content" type="text" id="adress" name="adress">
+        </div>
+        <div class="Addcandidate-bac AddingForm">
+            <label for="participate">Bac (oui/non) : </label>
+            <input class="AddingForm-content" type="text" name="bac" maxlength="20">
+        </div>
+    </div>
+</div>
+
+<div class="WrapperPeReunion">
+    <div class="WrapperPe">
+        <div class="Addcandidate-pe AddingForm">
+            <label for="pe">Identifiant pole emploi : </label>
+            <input class="AddingForm-content" type="text" name="pe" maxlength="20">
+        </div>
+        <div class="Addcandidate-peAdvisor AddingForm">
+            <label for="peAdvisor">Conseiller pole emploi : </label>
+            <input class="AddingForm-content" type="text" name="peAdvisor" maxlength="20">
+        </div>
+    </div>
+    
+    <div class="WrapperCodeReunion">
+        <div class="Addcandidate-codeRegion AddingForm">
+            <label for="peAdvisor">Code région : </label>
+            <input class="AddingForm-content" type="text" name="regionCode" maxlength="20">
+        </div>
+        <div class="Addcandidate-participate AddingForm">
+            <label for="participate">Le candidat a participé à la réunion  : </label>
+            <input class="AddingForm-content" type="text" name="participate" maxlength="20">
+        </div>
+    </div>
+</div>
+
+    
+    <div class="Addcandidate-comments AddingForm">
+        <label for="comments">commentaires : </label>
+        <textarea class="AddingForm-content" type="text" id="comments" name="comments"></textarea>
+    </div>
+    <div class="AddingForm">
+        <input class="AddingForm-button" type="submit" value="Envoyer">
+    </div>
+</form>

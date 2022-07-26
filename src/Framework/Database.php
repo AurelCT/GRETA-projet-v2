@@ -28,7 +28,7 @@ class Database extends \PDO {
         );
     
         $pdo->exec('SET NAMES UTF8');
-        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); //choix du monde de rapport d'erreur
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); //choix du mode de rapport d'erreur
         $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
             
         return $pdo;
@@ -46,8 +46,8 @@ class Database extends \PDO {
     public function prepareAndExecute(string $sql, array $values = []): \PDOStatement
     {
         // $pdo = $this->getPDOconnection();
-        $pdoStatement = $this->pdo-> prepare($sql);
-        $pdoStatement-> execute($values);
+        $pdoStatement = $this->pdo->prepare($sql);
+        $pdoStatement->execute($values);
         
         return $pdoStatement;
     }

@@ -1,0 +1,56 @@
+
+<?php if(count($candidates) !== 0):?>
+
+<table id="eventOnTable" class="MeetingTable">
+    <thead class="MeetingTable-title">
+        <tr class="MeetingTable-title-array">
+            <th class="MeetingTable-title-array" colspan="1">Nom/Prénom</th>
+            <th class="MeetingTable-title-array ColumnHide" colspan="1">Email</th>
+            <th class="ColumnHide" colspan="1">Commentaires </th>
+            <th class="ColumnHide" colspan="1">Bac </th>
+            <th class="ColumnHide" colspan="1">Présent </th>
+            <th colspan="1">Retenu </th>
+            <th colspan="1">Éditer </th>
+            <th colspan="1">Supprimer </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            
+    <?php foreach($candidates as $candidate): ?>
+        
+        <tr class="MeetingTable-candidate">
+  
+            <td class="MeetingTable-candidate-firstName"> <a class="MeetingTable-candidate-link" href="index.php?action=candidate&id_candidat=<?=$candidate['id_candidat']?>"> <?= htmlspecialchars($candidate['nom']) ?> <?= htmlspecialchars($candidate['prenom']) ?></a> </td>    
+            <td class="MeetingTable-candidate-email ColumnHide"> <?= htmlspecialchars($candidate['email']) ?> </td>
+            <td class="MeetingTable-candidate-comment ColumnHide" > <?= htmlspecialchars($candidate['commentaires']) ?> </td>
+            <td class="MeetingTable-candidate-bac ColumnHide"> <?= htmlspecialchars($candidate['bac']) ?> </td>
+            <?php if($candidate['present'] == 'oui'): ?>
+                <td class="MeetingTable-candidate-present ColumnHide"> <?= htmlspecialchars($candidate['present']) ?> </td>
+            <?php endif ?>
+            <?php if($candidate['present'] == 'non'): ?>
+                <td class="MeetingTable-candidate-missing ColumnHide"> <?= htmlspecialchars($candidate['present']) ?> </td>
+            <?php endif ?>
+            <?php if($candidate['present'] == ''): ?>
+                <td class="ColumnHide"> / </td>
+            <?php endif ?>
+                    
+            <?php if($candidate['retenu'] == 'oui'): ?>
+                <td class="MeetingTable-candidate-present "> <?= htmlspecialchars($candidate['retenu']) ?> </td>
+            <?php endif ?>
+            <?php if($candidate['retenu'] == 'non'): ?>
+                <td class="MeetingTable-candidate-missing "> <?= htmlspecialchars($candidate['retenu']) ?> </td>
+            <?php endif ?>
+            <?php if($candidate['retenu'] == ''): ?>
+                <td class=""> / </td>
+            <?php endif ?>
+            <!-- <td class="MeetingTable-candidate-bac">  <a href="index.php?action=editCandidate&id_candidat=    //$candidate['id_candidat']    "><i class="ph-pencil-line-thin"></i></a>  </td>                        -->
+            <td class="MeetingTable-candidate-btn">  <button class="btnEditForm" id="buttonToGetId" type="button" value="<?=$candidate['id_candidat']?>"> Éditer </button> </td>                       
+            <td class="MeetingTable-candidate-delete">  <a class="btnDeleteForm" href="index.php?action=deleteCandidatFromMeeting&candidate_id=<?=$candidate['id_candidat']?>&meeting_id=<?=$meeting['id_event']?>"> Supprimer </a> </td>                       
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>
+<?php else: ?>
+<h2>Aucun candidat n'est encore inscrit pour cette réunion</h2>
+<?php endif ?>

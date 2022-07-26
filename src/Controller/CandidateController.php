@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use App\Services\VerifyForm;
 use App\Repository\MeetingModel;
 use App\Repository\CandidateModel;
 
@@ -11,22 +12,29 @@ class CandidateController extends AbstractController
      */
     public function getAddCandidate()
     {
-        var_dump($_POST);
         $errors = [];
         if(!empty($_POST)){
             $lastName = trim($_POST['lastName']);
             $firstName = trim($_POST['firstName']);
             $email = trim($_POST['email']);
             $phone = trim($_POST['phone']);
+            $adress = trim($_POST['adress']);
             $pe = trim($_POST['pe']);
+            $peAdvisor = trim($_POST['peAdvisor']);
+            $regionCode = trim($_POST['regionCode']);
+            $participate = trim($_POST['participate']);
+            $bac = trim($_POST['bac']);
+            $comments = trim($_POST['comments']);
             //On récupère notre fonction qui gère les erreurs, si il est vide, on peut valider le formulaire
-            $errors = $this->validateCandidateForm($lastName,$firstName,$email, $phone);
+            $errors = (new VerifyForm())->validateCandidateForm($lastName,$firstName,$email);
             
             if(empty($errors)){
-                $newCandidate= (new CandidateModel())->createCandidate($lastName,$firstName,$email, $phone, $pe);
+                $newCandidate= (new CandidateModel())->createCandidate($lastName,$firstName,$email, $phone,$adress, $pe, $peAdvisor, $regionCode, $participate, $bac, $comments);
+                header('location: index.php?action=candidates');
+                exit ;
             }
         }
-        return $this->render('addCandidate', [
+        return $this->render('candidates/addCandidate', [
             'errors'=>$errors
         ]);
     }
@@ -36,55 +44,75 @@ class CandidateController extends AbstractController
         $meetings = (new MeetingModel())->getAllMeeting();
         $idCandidate = $_GET['id_candidat'];
         $candidate = (new CandidateModel())->getCandidate($idCandidate);
+        $errors = [];
+        if(!$candidate){
+            echo 'ERREUR : <p> le candidat n\'a pas été trouvé </p>';
+            exit;
+        }
 
         //possibilité d'ajouter un candidat à une réunion
         if(!empty($_POST)){
             $idMeeting = $_POST['id_meeting'];
-            var_dump(intval($idCandidate));
-            var_dump($idMeeting);
-            $insertCandidate = (new MeetingModel())->addCandidateToMeeting(intval($idMeeting), intval($idCandidate));
+            $errors = (new MeetingModel())->checkCandidateInMeeting($idCandidate, $idMeeting);
+            if(empty($errors)){
+                $insertCandidate = (new MeetingModel())->addCandidateToMeeting(intval($idMeeting), intval($idCandidate));
+            }
         }
-        return $this->render('candidate', [
-            'candidate'=>$candidate,
-            'meetings'=>$meetings
+        return $this->render('candidates/candidate', [
+            'candidate' => $candidate,
+            'meetings' => $meetings,
+            'errors' => $errors,
         ]);
     }
 
     public  function getAllCandidate()
     {
-        //On récupère et stock dans une variable notre requête SQL pour les candidats
         $candidates = (new CandidateModel())->getAllCandidate();
-
-        return $this->render('candidates', [
+        return $this->render('candidates/candidates', [
             'candidates'=>$candidates
         ]);
-
     }
 
-    /**
-     * Création d'une fonction pour sécuriser le formulaire d'ajout de candidat, gestion des erreurs si une partie du formulaire est vide/ne correspond pas
-     * @return array
-     */
-    private function validateCandidateForm(string $lastName,string $firstName, string $email, string $phone):array
+    public function editCandidate()
     {
+        //Récupération de l'id du candidat
+        $idCandidate = $_GET['id_candidat'];
+        $candidate = (new CandidateModel())->getCandidate($idCandidate);
+        
         $errors = [];
-
-        if(empty($lastName)){
-            $errors['lastName'] = 'Le nom est obligatoire';
+        if(!empty($_POST)){
+            $lastName = trim($_POST['lastName']);
+            $firstName = trim($_POST['firstName']);
+            $email = trim($_POST['email']);
+            $phone = trim($_POST['phone']);
+            $adress = trim($_POST['adress']);
+            $pe = trim($_POST['pe']);
+            $peAdvisor = trim($_POST['peAdvisor']);
+            $regionCode = trim($_POST['regionCode']);
+            $participate = trim($_POST['participate']);
+            $bac = trim($_POST['bac']);
+            $comments = trim($_POST['comments']);
+            //On récupère notre fonction qui gère les erreurs, si il est vide, on peut valider le formulaire
+            $errors = (new VerifyForm())->validateCandidateForm($lastName,$firstName,$email, $phone);
+            
+            if(empty($errors)){
+                $newCandidate= (new CandidateModel())->editCandidate($lastName,$firstName,$email, $phone,$adress, $pe, $peAdvisor, $regionCode, $participate, $bac, $comments, $idCandidate);
+                header('location: index.php?action=candidate&id_candidat='.$idCandidate);
+                exit ;
+            }
         }
-        if(empty($firstName)){
-            $errors['firstName'] = 'Le prénom est obligatoire';
-        }
-        if(empty($email)){
-            $errors['email'] = 'Un email est obligatoire';
-        }
-        elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // Vérifier que le format est valide
-            $errors['email'] = "Veuillez rentrer un format d'email valide";
-        }
-        if(empty($phone)){
-            $errors['phone'] = 'Un numéro de téléphone est obligatoire';
-        }
-        return $errors;    
+        
+        return $this->render('candidates/editCandidate', [
+            'candidate' => $candidate,
+            'errors'=>$errors,
+        ]);
     }
 
+    public function deleteCandidate()
+    {
+        $idCandidate = $_GET['id_candidat'];
+        (new CandidateModel())->deleteCandidate($idCandidate);
+        header('location: index.php?action=candidates');
+        exit ;
+    }
 }

@@ -16,17 +16,16 @@
             <div class="Connection-form-password Field">
                 <label class="Field-label" for="password">Mot de passe  </label>
                 <input class="Field-input" type="password" id="password" name="password">
-            </div>
+                <button class="Connection-button" type="submit">Connexion</button>
+        </form>
             
-            <button class="Connection-button" type="submit">Connexion</button>
-            
-            <?php if(isset($errors['message'])):?>
-                <p><?=   $errors['message'];?> </p> 
-                <?php endif?>
-            </form>
-
+        </div>
+        <?php if(isset($errors['message'])):?>
+            <p class="AddingForm-error"><?= $errors['message'];?> </p> 
+        <?php endif?>
+         <span> <a class="Connection-create"  href="index.php?action=signup"> ou créer un compte</a> </span>
     </section>
 
-        <?php endif ?>
+<?php endif ?>
 </section>
 

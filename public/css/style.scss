@@ -3,6 +3,12 @@ body {
     font-family: 'Lato', sans-serif;
     background-color: $firstColor1;
     margin: 0;
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.Main {
+    padding-bottom: 100px;
 }
 ////////////////////MOBILE/////////////////////
 
@@ -17,11 +23,13 @@ body {
     padding-left: 20px;
     display: flex;
     justify-content: space-between;
-    
     text-align: center;
     align-items: center;
     background-color: white;
     height: 80px;
+    &-button {
+        display:none; 
+    }
     &-nav {
         display: none;
         font-size: 20px;
@@ -35,15 +43,14 @@ body {
         right: 0;
         position: fixed;
         background-color: rgba(247, 238, 238, 0.7);
-        
-        &-link{
+        &-link {
             text-decoration: none;
             margin: 40px;
-            transition:ease-in;
+            box-sizing: border-box;
+            height: 30px;
             &:visited{
                 color: inherit;
-            }
-            
+            } 
         }
     }
     &-title {
@@ -55,18 +62,26 @@ body {
             }
         }
     }
+    &-admin {
+        &-deconnect{
+            text-decoration: none;
+            color: black;
+        }
+    }
 }
 .Header-nav.active{
    display:flex;
    flex-direction: column;
    justify-content: center;
 }
+.HeaderHideMobile {
+    display: none;
+}
 
 //Gestion du bouton burger
 .button-burger {
-    // margin: 20px;
     height: 2.4rem;
-    width: 2.8rem;
+    min-width: 2.8rem;
     background-color: transparent;
     background-image: linear-gradient(to right, currentColor, currentColor);
     background-position: center;
@@ -121,6 +136,12 @@ body {
     .button-burger{
         display: none;
     }
+    .HeaderHideDesktop{
+        display: none;
+    }
+    .HeaderHideMobile {
+        display: block;
+    }
     .Header {
         position: relative;
         &-nav {
@@ -145,12 +166,17 @@ body {
                 }
             }
         }
-        &-plus {
+        &-button {
+            display: inline-block;
             border: none;
             border-radius:10px;
-            background-color: $secondColor1;
+            background-color: $firstColor2;
             width: 80px;
             height: 40px;
+            &:hover {
+                cursor: pointer;
+                background-color: $firstColor2Hover;
+            }
             
             &-menu {
                 display:none;
@@ -160,18 +186,15 @@ body {
                 border-radius:5px;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                .AdminLink {
+                   display:flex;
                    &:hover{
                     background-color: #cbd4dd;
                    }
                }
             }
-            &:hover {
-                cursor: pointer;
-                background-color: $secondColor1Hover;
-            }
         }
     }
-    .Header-plus-menu.active{
+    .Header-button-menu.active{
         display: flex;
         flex-direction: column;
         background-color: #f9fafb;
@@ -184,6 +207,22 @@ body {
 //PAGE HOME////////
 ////////////////////////////////////
 ///////////////////////////////////
+
+.Signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &-title{
+        color: white;
+    }
+    &-link {
+        text-decoration: none;
+        color: $secondColor1;
+        &:hover{
+            color: $secondColor1Hover;
+        }
+    }
+}
 .Connection {
     margin: 0;
     padding: 0;
@@ -193,6 +232,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top:50px;
+    position: relative;
     &-title {
         font-size: 2em;
 
@@ -239,6 +279,10 @@ body {
         }
         color: white;
     }
+    &-create{
+        color: $secondColor1;
+        text-decoration: none;
+    }
 }
 .HomeLogin{
     color: white;
@@ -252,6 +296,7 @@ body {
 //PAGE DES CANDIDATS-REUNIONS////////
 ////////////////////////////////////
 ///////////////////////////////////
+//MOBILE
 
 //Partie de recherche communes au formulaire de recherche
 .Title{
@@ -263,46 +308,101 @@ body {
     padding-top: 10px;
 }
 .SearchForm{
-    background-color: white;
+    background-color:$firstColor1;
     padding: 20px;
     display:flex;
     flex-direction: column;
     justify-content:center;
     align-items:center;
+    margin-bottom:50px;
     &-button {
         background-color: $firstColor2;
         color: white;
         width: 120px;
-        height: 40px;
-        
+        height: 40px;    
+    }
+    &-label{
+        color: white;
     }
 }
+.Select{
+    height: 30px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    // font-family: 'Lato', sans-serif;
+}
+.FilterButton {
+    max-width: 300px;
+}
+
+
 
 //Affichage de tous les CANDIDATS
 
 .AllCandidate{
-    color: white;
-    display: flex;
-    justify-content:space-between;
+    color: $firstColor1;
+    background-color: #ffffff;
+    border-radius:5px;
     margin: 20px;
-  
+    display: block;
     a{
         text-decoration: none;
         color: inherit;
     }
-    &-contact{
-        display: flex;
-        align-items:center;
+    &-info{
+        padding-top: 5px;
+        &-link{
+            display: flex;
+            justify-content: space-between;
+            border-top: solid .3px gray;
+        }
+        &-email{
+            display: flex;
+            justify-content:space-evenly;
+            align-items: center;
+            width:50%;
+            border-right: solid .3px gray;    
+        }
+        &-number {
+            width:50%;
+            display: flex;
+            justify-content:space-evenly;
+            align-items: center;    
+        }
     }
 }
+.CardName {
+    margin: 20px;
+}
+
+//TABLET
+@media screen and(min-width: 600px) { 
+    .Candidates{ 
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+//DESKTOP
+@media screen and(min-width: 1080px) { 
+    .Candidates{ 
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 1300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 
 //Affichage de toute les réunions
 
 .Meetings{
     display: flex;
     flex-direction: column;
-    justify-content:center;
     align-items:center;
+    color: white;
     &-content{
         margin: 20px;
         color: white;
@@ -312,20 +412,46 @@ body {
     }
 }
 
-//Page d'ajout d'un candidat
+//TABLET
+@media screen and(min-width: 600px) { 
+    .Meetings{ 
+        display:grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
-.AddCandidate{
+//DESKTOP
+@media screen and(min-width: 1080px) { 
+    .Meetings{ 
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width:1300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+
+//Page d'ajout d'un candidat et d'une réunion
+//MOBILE
+.Adding{
     color: white;
     margin: 20px;
-    font-size:20px;
+    font-size:20px; 
    &Form{
        display: flex;
        flex-direction: column;
        margin-top: 20px;
+       margin-left: auto;
+       margin-right: auto;
+       max-width: 800px;
        &-content{
            height: 30px;
+           border-radius: 5px;
+           border:none;
        }
-
        &-error{
            color: $errorColor;
        }
@@ -341,17 +467,45 @@ body {
            letter-spacing: 2px;
            font-size: 20px;
            font-family: 'Lato', sans-serif;
+           &:hover{
+            color: $secondColor1;
+            cursor: pointer;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+           }
        }
    }
 }
 
-//Page d'un candidat 
-.Candidate {
-    color: white;
-    margin: 10px;
-    &-mail {
+//DESKTOP 
+@media screen and(min-width: 600px) { 
+    .Adding{
+        font-size: 18px;
+        &Form{
+            &-content {
+                min-width:300px;
+            }
+        }
+    }
+    //Spécifique pour la page d'ajout d'un candidat
+    .WrapperNameInfo, .WrapperPeReunion {
         display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 20px;
+    }
+}
+
+
+//////Page d'un candidat 
+.Candidate{
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    &-mail, &-name {
+        display: flex;
+        text-decoration: none;
         justify-content: space-between;
+        align-items: center;
         &-logo{
             display: flex;
             align-items: center;
@@ -378,16 +532,263 @@ body {
         justify-content: space-between;
     }
 }
+.EditCandidateLogo {
+    color: white;
+}
 .AdditonalInfo{
     color: white;
-    background-color: rgb(47,72,101);
+    background-color: $secondColor2;
     .SideInfo{
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 400px;
         display:flex;
         justify-content: space-between;
-        margin: 10px;
     }
 }
+
 .CandidateComments{
     color: white;
     background-color: rgb(47,72,101);
+    min-height: 50px;
+}
+.CandidateDelete{
+    display:flex;
+    justify-content: center;
+    margin: 20px;
+    &-btn{
+        text-decoration: none;
+        color: white;
+        background-color: $errorColor;
+        border: none;
+        border-radius:10px;
+        padding: 10px;
+        &:hover {
+            background-color: $errorColorHover;
+        }
+    }
+}
+
+////PAGE D'AJOUT D'UNE REUNION
+
+
+/////////////Page d'une réunion
+//Gestion des colonnes à cacher ou non selon les media queries
+
+@media screen and(max-width: 750px) { 
+    .ColumnHide {
+        display: none;
+    }
+}
+
+.MeetingHeader{
+    color: white;
+    text-align: center;
+    height: 100px;
+    margin: 50px;
+    &-form {
+       margin: 20px;
+       display: flex;
+       justify-content:center;
+       align-items:center;
+       flex-wrap: wrap;
+       &-btn {
+           border: none;
+           margin-left: 10px;
+           background-color: white;
+           border-radius:10px;
+           padding: 10px;
+           cursor: pointer;
+           &:hover {
+               background-color: $secondColor1;
+               color: white;
+           }
+       }
+    }
+}
+.MeetingTable {
+    background-color: white;
+    color: black;
+    width: 100%;
+    max-width: 1200px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    height: 300px;
+    border-radius:20px;
+    overflow: hidden;
+    border-collapse: collapse;
+    &-title {
+        border: none;
+        background-color: rgba(248,250,251, 0.7); 
+        position:sticky;
+        top: 0;
+        color: black;
+        text-align: center;
+        &-array {
+            border-bottom: .4px solid;
+            height: 50px;
+        }
+    }
+    &-candidate {
+        text-align: center;
+        height: 80px;
+        &:nth-child(even){
+            background-color: #f5fbff;
+        }
+        &-present {
+            color: green;
+        }
+        &-missing {
+            color: $errorColor;
+        }
+        &-link {
+            color: inherit;
+            text-decoration: none;
+        }
+        &-delete {
+            padding-right: 10px;
+        }
+        .btnEditForm {
+            border: none;
+            border-radius:10px;
+            background-color: $secondColor1;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            &:hover {
+                background-color: $secondColor1Hover;
+            }
+        }
+        .btnDeleteForm {
+            border: none;
+            border-radius:10px;
+            background-color: $errorColor;
+            text-decoration: none;
+            height: 30px;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            &:hover {
+                background-color: $errorColorHover;
+            }
+        }
+    }
+}
+.MeetingDelete {
+    display:flex;
+    justify-content: center;
+    margin: 20px;
+    &-btn{
+        text-decoration: none;
+        color: white;
+        background-color: $errorColor;
+        border: none;
+        border-radius:10px;
+        padding: 10px;
+        &:hover {
+            background-color: $errorColorHover;
+        }
+    }
+}
+
+
+
+
+//Gérer le modal d'edit 
+//Créer un effet de transition pour le modal
+@keyframes animateModalOpen {
+    from {top: -100px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+@keyframes animateModalClosed {
+    from {top: -100px; opacity: 1}
+    to {top: 0; opacity: 0}
+}
+.EditMeeting {
+    display: none;
+    &-content {
+        animation-name: 'animateModalOpen';
+        animation-duration: 0.4s;
+        background-color: #f9fafb;
+        margin: 100px auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 70%;
+        height: 200px;
+        display: flex;
+        justify-content:space-evenly;
+        align-items: center;
+        &-present, &-retenu {
+            display: flex;
+            justify-content:space-evenly;
+            margin: 20px;
+            &-select {
+                margin-left: 10px;
+                border: 0.2px solid rgb(181, 179, 179);
+                border-radius: 5px;
+                background-color: white;
+                padding: 5px;
+                &:hover {
+                    background-color: rgb(248, 248, 248);
+                }
+            }
+        }
+        &-button {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-evenly;
+            margin:20px;
+        }
+        &-validate {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: $firstColor2;
+            color: white;
+            cursor: pointer;
+            &:hover {
+                background-color: $firstColor2Hover;
+            }
+        }
+        &-btn {
+            border: 0.2px solid rgb(181, 179, 179);
+            border-radius: 5px;
+            background-color: white;
+            padding: 5px;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(248, 248, 248);
+            }
+        }
+    }
+}
+.EditMeeting.Active{
+    display: block;
+    position: fixed; 
+    z-index: 1; 
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(205, 187, 187, 0.6);
+    // overflow: auto;
+    background-color: rgba(0,0,0,0.6); 
+}
+.EditTextArea {
+    margin-left: 10px;
+    border: 0.2px solid rgb(181, 179, 179);
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px;
+}
+
+.Footer{
+    padding: 20px;
+    background-color: white;
+    max-height: 80px;
+    margin: 100px 0 0 0;
+    margin-top: auto;
+    display:flex;
+    justify-content:space-evenly;
 }

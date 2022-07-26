@@ -1,0 +1,46 @@
+
+    <h2 class="Title">Rechercher un candidat</h2>
+    <form class="AllCandidate-form SearchForm" id="TestAjax" action="index.php?action=filterCandidate" method="GET">    
+        
+        <div class="SearchForm-formation">
+            <label class="SearchForm-label" id="formation" for="formation">Recherche par nom : </label>
+            <input name="formation" id="formationValue" type="text">
+        </div>
+
+        <!-- <input class="Connection-button" type="submit" value="rechercher"> -->
+        <button class="Connection-button FilterButton" type="submit" value="rechercher">Rechercher</button>
+    </form>
+
+<section id="CandidatesContainer" class="Candidates">
+   
+    <?php foreach($candidates as $candidate): ?> 
+        <article class="AllCandidate">
+        
+            <div class="AllCandidate-info">
+                <a id="CandidateFilterId" class="AllCandidate-info-name" href="index.php?action=candidate&id_candidat=<?=$candidate['id_candidat']?>"><h3 class="CardName" id="CandidateFilterName"><?= htmlspecialchars($candidate['nom']) . ' ' . htmlspecialchars($candidate['prenom'])  ?> </h3></a>
+                <div class="AllCandidate-info-link">
+                    <div class="AllCandidate-info-email">
+                        <div>
+                            <svg class="Candidate-mail-logo-svg" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 9L12 12.5L17 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17V7C2 5.89543 2.89543 5 4 5H20C21.1046 5 22 5.89543 22 7V17C22 18.1046 21.1046 19 20 19H4C2.89543 19 2 18.1046 2 17Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <p> <a class="link" href="mailto:<?=htmlspecialchars($candidate['email'])?>">Email</a> </p>
+                    </div>
+                    <div class="AllCandidate-info-number">
+                        <div class="AllCandidate-info-number-logo">
+                            <svg class="Candidate-phone-logo-svg" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.2426 5.24268H19.2426M22.2426 5.24268H19.2426M19.2426 5.24268V2.24268M19.2426 5.24268V8.24268" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.1182 14.702L14 15.5C11.2183 14.1038 9.5 12.5 8.5 10L9.26995 5.8699L7.81452 2L4.0636 2C2.93605 2 2.04814 2.93178 2.21654 4.04668C2.63695 6.83 3.87653 11.8765 7.5 15.5C11.3052 19.3052 16.7857 20.9564 19.802 21.6127C20.9668 21.8662 22 20.9575 22 19.7655L22 16.1812L18.1182 14.702Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p> <a href="#">Appeler</a> </p>
+                    </div>
+                </div>
+            </div>
+           
+        </article>  
+    <?php endforeach ?>
+        
+</section>

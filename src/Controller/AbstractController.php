@@ -17,9 +17,9 @@ class AbstractController
     {
         extract($params);
         unset($params);
-        //on déclenche la temporisation de sortie
+        //temporisation de sortie
         ob_start();
          include TEMPLATE_DIR . DIRECTORY_SEPARATOR . $baseTemplate;
          return ob_get_clean();
-    }
+    } 
 }

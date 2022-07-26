@@ -1,0 +1,75 @@
+<article class="Candidate">
+    <div class="Candidate-name">
+        <h2 class="Candidate-name"><?= $candidate['prenom'] . ' ' . $candidate['nom'] ?></h2>
+        <a class="EditCandidateLogo" href="index.php?action=editCandidate&id_candidat=<?=$candidate['id_candidat']?>"><i class="ph-pencil-line-thin"></i></a>
+    </div>
+    <div class="Candidate-mail">
+        <p class="Candidate-email"><?= $candidate['email']?></p>
+        <div class="Candidate-mail-logo">
+            <svg class="Candidate-mail-logo-svg" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 9L12 12.5L17 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 17V7C2 5.89543 2.89543 5 4 5H20C21.1046 5 22 5.89543 22 7V17C22 18.1046 21.1046 19 20 19H4C2.89543 19 2 18.1046 2 17Z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        </div>
+    </div>
+    <div class="Candidate-phone">
+        <p class="Candidate-phone-number"><?= $candidate['telephone']?></p>
+        <div class="Candidate-phone-logo">
+            <svg class="Candidate-phone-logo-svg" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.2426 5.24268H19.2426M22.2426 5.24268H19.2426M19.2426 5.24268V2.24268M19.2426 5.24268V8.24268" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.1182 14.702L14 15.5C11.2183 14.1038 9.5 12.5 8.5 10L9.26995 5.8699L7.81452 2L4.0636 2C2.93605 2 2.04814 2.93178 2.21654 4.04668C2.63695 6.83 3.87653 11.8765 7.5 15.5C11.3052 19.3052 16.7857 20.9564 19.802 21.6127C20.9668 21.8662 22 20.9575 22 19.7655L22 16.1812L18.1182 14.702Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+    </div>
+    <div class="Candidate-participate">
+        <p>Confirmation participation : </p>
+        <p class="Candidate-phone"><?= $candidate['participation']?></p>
+    </div>
+</article>
+
+<article class="AdditonalInfo">
+    <div class="AdditionalInfo-wrapper">
+
+        <div class="AdditionalInfo-id SideInfo">
+            <p>Identifiant pole emploi : </p>
+            <p><?= $candidate['id_poleEmploi'] ?></p>
+        </div>
+        <div class="AdditionalInfo-contact SideInfo">
+            <p>Conseiller pole emploi : </p>
+            <p><?= $candidate['conseillerPE'] ?></p>
+        </div>
+        <div class="AdditionalInfo-codeRegion SideInfo">
+            <p>Code région : </p>
+            <p><?= $candidate['codeRegion'] ?></p>
+        </div>
+        <div class="AdditionalInfo-bac SideInfo">
+            <p>Bac : </p>
+            <p><?= $candidate['bac'] ?></p>
+        </div>
+    </div>
+</article>
+
+<article class="CandidateComments">
+    <p>Commentaires : <?= $candidate['commentairesReunion'] ?> </p>
+</article>
+
+<div class="Candidate">
+    <p>Ajouter le candidat à une réunion : </p>
+    <form action="index.php?action=candidate&id_candidat=<?=$candidate['id_candidat']?>" method="post">
+    <select class="Select" name="id_meeting" id="id_meeting">    
+                <?php foreach($meetings as $meeting): ?>
+                    <option value="<?= $meeting['id_event'] ?> "><?= $meeting['name'] . '  ' .$meeting['meetingDate'] ?> </option>
+                <?php endforeach ?>     
+                </option>
+            </select>
+            <button type="submit">Ajouter</button>
+    </form>
+
+    <?php if (isset($errors['userExist'])): ?>
+        <p class="AddingForm-error"><?= ($errors['userExist']) ?> </p>
+    <?php endif; ?>
+<div class="CandidateDelete">
+    <a class="CandidateDelete-btn" href="index.php?action=deleteCandidate&id_candidat=<?=$candidate['id_candidat']?>">Supprimer le candidat</a>
+</div>
+</div>

@@ -1,0 +1,41 @@
+<h2 class="Title">Créer une réunion</h2>
+
+
+<form class="Adding" action="index.php?action=createMeeting" method="POST">
+    <div class="AddingForm">
+        <label for="name">Donnez un nom à votre réunion : </label>
+        <input class="AddingForm-content" type="text" id="name" name="name">
+        <?php if(isset($errors['name'])):?>
+                <p class="AddingForm-error"> <?= $errors['name'] ?> </p>
+        <?php  endif?>
+    </div>
+    <div class="AddingForm">
+
+        <label for="formation">Titre de formation concerné : </label>
+        <select class="Select" name="formation" id="formation">
+            <?php foreach($formations as $formation): ?>
+                <option value="<?= $formation['id_formation'] ?> "><?= $formation['titreFormation'] ?> </option>
+            <?php endforeach ?>
+        </select>
+    </div>
+    <div class="AddingForm">
+
+        <label for="place">lieu de la réunion : </label>
+        <select class="Select" name="place" id="place">
+            <!-- boucle sur les différents lieux insérés dans notreBDD -->
+            <?php foreach($places as $place): ?>
+                <option value="<?= $place['id_lieu'] ?> "><?= $place['lieu'] ?> </option>
+                <?php endforeach ?>
+                
+            </select>
+    </div>
+    <div class="AddingForm">
+
+        <label for="meetingTime">Date de la réunion : </label>
+        <input class="Select"  type="date" id="meetingTime" name="meetingTime">
+    </div>
+    <div class="AddingForm">
+        <input class="AddingForm-button" type="submit" value="Créer">
+    </div>
+
+</form>

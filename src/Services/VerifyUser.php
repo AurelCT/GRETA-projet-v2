@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Services;
 
 use App\Repository\UserModel;
 
@@ -24,7 +24,10 @@ class VerifyUser
             $errors['email'] = 'Un email est obligatoire';
         }
         elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // Vérifier que le format est valide
-            $errors['email'] = "Veuillez rentrer un format d'email valide";
+            $errors['email'] = "Veuillez entrer un format d'email valide";
+        }
+        elseif((new UserModel())->getUserByEmail($email)){
+            $errors['email'] = "L'email existe déjà";
         }
 
         if (!$password) { 
@@ -55,7 +58,6 @@ class VerifyUser
         if ($user) {
             // Si le mot de passe est correct
             if (password_verify($password, $user['password'])) {
-
                 // Tout est OK on peut retourner l'utilisateur
                 return $user;
             }

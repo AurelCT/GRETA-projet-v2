@@ -1,8 +1,10 @@
 <?php 
 namespace App\Controller;
-use App\Repository\MeetingModel;
-use App\Repository\FormationModel;
+use App\Services\VerifyForm;
 use App\Repository\PlaceModel;
+use App\Repository\MeetingModel;
+use App\Repository\CandidateModel;
+use App\Repository\FormationModel;
 //Controller des différentes pages d'accueil
 class MeetingController extends AbstractController
 {
@@ -19,7 +21,7 @@ class MeetingController extends AbstractController
         //On insère l'id dans notre requête pour afficher la réunion
         $meeting = (new MeetingModel())->getOneMeeting($idMeeting) ;
 
-        //test pour savoir si l'article existe
+        //test pour savoir si la réunion existe
         if(!$meeting){
             echo 'ERREUR : <p> aucune réunion possédant cet id </p>';
             exit;
@@ -27,18 +29,24 @@ class MeetingController extends AbstractController
 
         //On récupère les candidats affiliés à la réunion
         $candidates = (new MeetingModel())->getCandidatesPerMeeting($idMeeting);
+        //On récupère tous les candidats pour éventuellement les ajouter à la réunion
+        $allCandidates = (new CandidateModel())->getAllCandidate();
         // var_dump($meeting);
-        return $this->render('meeting', [
+        return $this->render('meetings/meeting', [
             'meeting'=>$meeting,
-            'candidates'=>$candidates
+            'candidates'=>$candidates,
+            'allCandidates' => $allCandidates,
         ]);
     }
 
     public function getAllMeeting()
     {
         $meetings = (new MeetingModel())->getAllMeeting();
-        return $this->render('allMeeting', [
-            'meetings'=>$meetings
+        $formations = (new Meetingmodel())->getAllFormations();
+
+        return $this->render('meetings/allMeeting', [
+            'meetings'=>$meetings,
+            'formations' => $formations
         ]);
     }
 
@@ -48,7 +56,7 @@ class MeetingController extends AbstractController
         $formations = (new FormationModel())->getAllFormations();
         //On récupère notre tableau des lieux de réunion  dans une variable
         $places = (new PlaceModel())->getAllPlaceMeeting();
-        
+        $errors = [];
         if(!empty($_POST)){    
             //Récupération des données du formulaire envoyé en POST
             $name = trim($_POST['name']);
@@ -56,16 +64,59 @@ class MeetingController extends AbstractController
             $meetingDate= $_POST['meetingTime'];
             $date = new \DateTimeImmutable($meetingDate);
             $place = trim($_POST['place']);
+            $errors =  (new VerifyForm())->validateMeetingForm($name);
             
-            // $newMeeting = new MeetingModel();
-            $meeting = (new MeetingModel())->createMeeting($name,$id_formation,$date,$place);
+            if(empty($errors)){
+                $meeting = (new MeetingModel())->createMeeting($name,$id_formation,$date,$place);
+                header('location: index.php?action=allMeeting');
+                exit ;
+            }
         }
        
-        return $this->render('createMeeting', [
+        return $this->render('meetings/createMeeting', [
             'formations'=>$formations,
-            'places'=>$places
+            'places'=>$places,
+            'errors' => $errors,
         ]);
     }
 
-  
+    public function editCandidateInMeeting()
+    {
+        if(!empty($_POST)){
+            $retenu = trim($_POST['retenu']);
+            $present = trim($_POST['present']);
+            $commentsOnCandidat = trim($_POST['commentsOnCandidat']);
+            $meeting_id = trim($_POST['formMeetingIdValue']);
+            $candidatId = trim($_POST['formCandidateIdValue']);
+
+            (new MeetingModel())->updateCandidateInMeeting($present ,$retenu, $commentsOnCandidat, $meeting_id, $candidatId);
+
+            header('location: index.php?action=meeting&id_event='.$meeting_id);
+            exit;
+        }
+    }
+
+    /**
+     * Supprimer un candidat d'une réunion
+     */
+    public function deleteCandidatFromMeeting()
+    {
+        $meeting_id = $_GET['meeting_id'];
+        $candidate_id = $_GET['candidate_id'];
+
+        (new MeetingModel())->deleteCandidateFromMeeting($meeting_id, $candidate_id);
+        header('location: index.php?action=meeting&id_event='.$meeting_id);
+        exit;
+    }
+
+    /**
+     * Supprimer une réunion
+     */
+    public function deleteMeeting()
+    {
+        $meeting_id = $_GET['meeting_id'];
+        (new MeetingModel())->deleteMeeting($meeting_id);
+        header('location: index.php?action=allMeeting');
+        exit;
+    }
 }

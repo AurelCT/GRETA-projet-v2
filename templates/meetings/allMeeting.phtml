@@ -1,0 +1,26 @@
+<!-- TODO ajouter un filtre de recherche -->
+
+<h2 class="Title">Rechercher une réunion</h2>
+    <form id="AjaxReunion" class="SearchForm" action="index.php?action=filterReunion" method="GET">    
+        <div class="SearchForm-formation">
+            <label class="SearchForm-label" id="formationReunion" for="formationReunion">Formation concernée : </label>
+            <select class="Select" name="formationReunion" id="ReunionValue"> 
+                <?php foreach($formations as $formation): ?>
+                    <option class="SearchForm-select-option" value="<?= $formation['titreFormation'] ?>" ><?= $formation['titreFormation'] ?>  </option>
+                <?php endforeach ?>
+            </select>
+        </div>     
+        <button class="Connection-button FilterButton" type="submit" value="rechercher">Filtrer</button>     
+    </form>
+
+<section id="meetingsContainer" class="Meetings">
+    <?php foreach($meetings as $meeting): ?>
+        <article class="Meetings-content">
+            <h2 class="Meetings-content-title"> <?= $meeting['name'] ?> </h2>
+            <a href="index.php?action=meeting&id_event=<?=$meeting['id_event']?>"><img class="Meetings-content-img" src="../public/img/<?=$meeting['image']?>" alt="image pour la réunion infoco"></a>
+            <p>le  <?= $meeting['meetingDate'] ?> </p>
+        </article>
+        <?php endforeach ?>
+    </section>
+
+

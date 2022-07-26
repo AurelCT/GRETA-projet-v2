@@ -16,12 +16,13 @@ class UserSession
      */
     function userRegister(int $id_user, string $firstName, string $lastName, string $email, string $role)
     {
-        $_SESSION['user'] = [
+        $_SESSION['user'] = 
+        [ 
             'id_user' => $id_user,
             'firstName' => $firstName,
             'lastName' => $lastName,
             'email' => $email,
-            'role' => $role
+            'role' => $role,
         ];
     }
 
