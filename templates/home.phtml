@@ -1,6 +1,6 @@
 <section class="Connection">
     <?php if($this->userSession->isConnected()): ?>
-        <p>Bonjour <?= $_SESSION['user']['firstName'] ?></p>
+        <p>Bonjour <?= $_SESSION['user']['firstName'] .' ' .$_SESSION['user']['lastName'] ?></p>
     <?php endif?>
 
 <?php if(!$this->userSession->isConnected()): ?>

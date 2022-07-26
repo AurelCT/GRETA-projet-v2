@@ -11,6 +11,10 @@ class MeetingController extends AbstractController
   
     public function getOneMeeting()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+
         // Valider le paramètre id_event
         if (!array_key_exists('id_event', $_GET) || !$_GET['id_event'] || !ctype_digit($_GET['id_event'])) {
             echo '<p>ERREUR : id de la réunion manquant ou incorrect</p>';
@@ -41,6 +45,10 @@ class MeetingController extends AbstractController
 
     public function getAllMeeting()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+
         $meetings = (new MeetingModel())->getAllMeeting();
         $formations = (new Meetingmodel())->getAllFormations();
 
@@ -52,6 +60,10 @@ class MeetingController extends AbstractController
 
     public function getMeetingForm()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+
         //On récupère notre tableau des titres de formation  dans une variable
         $formations = (new FormationModel())->getAllFormations();
         //On récupère notre tableau des lieux de réunion  dans une variable
@@ -82,6 +94,10 @@ class MeetingController extends AbstractController
 
     public function editCandidateInMeeting()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+        
         if(!empty($_POST)){
             $retenu = trim($_POST['retenu']);
             $present = trim($_POST['present']);

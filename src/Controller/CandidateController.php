@@ -12,6 +12,10 @@ class CandidateController extends AbstractController
      */
     public function getAddCandidate()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+
         $errors = [];
         if(!empty($_POST)){
             $lastName = trim($_POST['lastName']);
@@ -25,11 +29,12 @@ class CandidateController extends AbstractController
             $participate = trim($_POST['participate']);
             $bac = trim($_POST['bac']);
             $comments = trim($_POST['comments']);
+
             //On récupère notre fonction qui gère les erreurs, si il est vide, on peut valider le formulaire
             $errors = (new VerifyForm())->validateCandidateForm($lastName,$firstName,$email);
             
             if(empty($errors)){
-                $newCandidate= (new CandidateModel())->createCandidate($lastName,$firstName,$email, $phone,$adress, $pe, $peAdvisor, $regionCode, $participate, $bac, $comments);
+                $newCandidate= (new CandidateModel())->createCandidate($firstName,$lastName,$email, $phone,$adress, $pe, $peAdvisor, $regionCode, $participate, $bac, $comments);
                 header('location: index.php?action=candidates');
                 exit ;
             }
@@ -41,6 +46,10 @@ class CandidateController extends AbstractController
 
     public function getCandidate()
     {  
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+
         $meetings = (new MeetingModel())->getAllMeeting();
         $idCandidate = $_GET['id_candidat'];
         $candidate = (new CandidateModel())->getCandidate($idCandidate);
@@ -67,6 +76,10 @@ class CandidateController extends AbstractController
 
     public  function getAllCandidate()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+
         $candidates = (new CandidateModel())->getAllCandidate();
         return $this->render('candidates/candidates', [
             'candidates'=>$candidates
@@ -75,6 +88,10 @@ class CandidateController extends AbstractController
 
     public function editCandidate()
     {
+        if(!$this->userSession->isConnected()){
+            header('Location: index.php?action=home');   
+        }
+        
         //Récupération de l'id du candidat
         $idCandidate = $_GET['id_candidat'];
         $candidate = (new CandidateModel())->getCandidate($idCandidate);

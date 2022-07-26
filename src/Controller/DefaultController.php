@@ -46,7 +46,7 @@ class DefaultController extends AbstractController
 
             if(empty($errors)){
                 $hash = password_hash($password, PASSWORD_DEFAULT);
-                $newUser = (new UserModel())->createNewUser($lastName,$firstName,$email,$hash);
+                $newUser = (new UserModel())->createNewUser($firstName,$lastName,$email,$hash);
                 header('Location: index.php?action=home');
             }
 

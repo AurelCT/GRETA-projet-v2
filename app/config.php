@@ -11,5 +11,5 @@ const TEMPLATE_DIR = PROJECT_DIR . '/templates';
 */
 const DB_HOST = "localhost"; //hôte du domaine du serveur de BDD
 const DB_NAME = "gretaInfoCo"; // Nom de la base de donnée
-const DB_USER = "root";  // Utilisateur de la base de données
-const DB_PASSWORD = "root"; //mot de passe
+const DB_USER = "adminGreta";  // Utilisateur de la base de données
+const DB_PASSWORD = "securepassword"; //mot de passe

@@ -19,22 +19,6 @@ window.addEventListener('resize', ()=>{
     }
 })
 
-// if(document.querySelector('.Header-nav').classList.contains('active')){
-//     window.addEventListener('click', () => {
-//         document.querySelector('.Header-nav').classList.remove('active');
-//     })
-// };
-
-
-
-//GERE LE MODAL DE LA PARTIE REUNION
-
-// let modalBtn = document.querySelectorAll('.activateModal');
-
-// modalBtn.addEventListener('click', ()=> {   
-//     let modalForm = document.querySelectorAll('.Modal').classList.toggle('activeModal');
-// });
-
 
 
 //Requête ajax pour la recherche de candidat par son nom

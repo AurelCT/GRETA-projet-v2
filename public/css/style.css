@@ -79,6 +79,11 @@ body {
 .Header-admin-deconnect {
   text-decoration: none;
   color: black;
+  padding: 10px;
+}
+
+.Header-admin-deconnect:hover {
+  color: #dc3545;
 }
 
 .Header-nav.active {

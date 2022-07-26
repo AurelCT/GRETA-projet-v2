@@ -22,4 +22,6 @@ class AbstractController
          include TEMPLATE_DIR . DIRECTORY_SEPARATOR . $baseTemplate;
          return ob_get_clean();
     } 
+
+
 }

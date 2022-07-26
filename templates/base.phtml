@@ -12,9 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link rel="stylesheet" href="../public/css/style.css">
+    <script defer src="../public/js/index.js"></script>
     <title>GretaInfoCo</title>
 </head>
 <body>
+  
     <?php if($this->userSession->isConnected()): ?>
         <header class="Header">
             <button class="button-burger" id="btn-menu" type="button"></button>
@@ -38,20 +40,19 @@
                     <a class="Header-admin-deconnect" href="index.php?action=logout">Déconnexion</a>
                 </div>
             </header>
-    <?php endif ?>
-
-    <main class="Main">
-        <?php include TEMPLATE_DIR . '/' . $template . '.phtml';?> 
-    </main>
+            <?php endif ?>
+            
+            <main class="Main">
+                <?php include TEMPLATE_DIR . '/' . $template . '.phtml';?> 
+            </main>
 
     <?php if($this->userSession->isConnected()): ?>
         <footer class="Footer">
             <p>mention légale</p>
             <p>Contact</p>
         </footer>   
-    <?php endif ?>   
+    <?php endif ?> 
     
         
-<script src="../public/js/index.js"></script>
 </body>
 </html>

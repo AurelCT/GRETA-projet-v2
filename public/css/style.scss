@@ -66,6 +66,10 @@ body {
         &-deconnect{
             text-decoration: none;
             color: black;
+            padding: 10px;
+            &:hover {
+                color: $errorColor;
+            }
         }
     }
 }
